@@ -94,8 +94,7 @@ class AliYunOssAdapter extends AbstractAdapter
         if ('/' === substr($dirname, -1)) {
             $dirname = substr($dirname, 0, -1);
         }
-        $normalized = ['path' => $dirname, 'type' => 'dir'];
-        return $normalized;
+        return ['path' => $dirname, 'type' => 'dir'];
     }
 
     /**
@@ -266,8 +265,7 @@ class AliYunOssAdapter extends AbstractAdapter
     {
         $url = $this->client->signUrl($this->bucket, $path, 3600);
         $stream = fopen($url, 'rb');
-        $fileInfo = $this->mapFileInfo($path, false, ['stream' => $stream]);
-        return $fileInfo;
+        return $this->mapFileInfo($path, false, ['stream' => $stream]);
     }
 
     /**
@@ -315,8 +313,7 @@ class AliYunOssAdapter extends AbstractAdapter
      */
     public function getMetadata($path)
     {
-        $metaData = $this->mapFileInfo($path, true);
-        return $metaData;
+        return $this->mapFileInfo($path, true);
     }
 
     /**
@@ -328,8 +325,7 @@ class AliYunOssAdapter extends AbstractAdapter
      */
     public function getSize($path)
     {
-        $metaData = $this->getMetadata($path);
-        return $metaData['size'];
+        return $this->getMetadata($path);
     }
 
     /**
@@ -353,8 +349,7 @@ class AliYunOssAdapter extends AbstractAdapter
      */
     public function getTimestamp($path)
     {
-        $meta = $this->getMetadata($path);
-        return $meta['timestamp'];
+        return $this->getMetadata($path);
     }
 
     /**
